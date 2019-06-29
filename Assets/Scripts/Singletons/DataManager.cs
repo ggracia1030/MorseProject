@@ -34,10 +34,12 @@ public class DataManager : Singleton<DataManager>
     public void AddSignal()
     {
         signalList.Add(new SignalData());
+        Debug.Log("Signal Start: " + signalList[signalList.Count - 1].StartSignalTime.TotalSeconds);
     }
 
     public void EndSignal()
     {
         signalList[signalList.Count - 1].EndSignal();
+        Debug.Log("Signal End: " + signalList[signalList.Count - 1].EndSignalTime.TotalSeconds);
     }
 }
