@@ -18,6 +18,19 @@ public class DataManager : Singleton<DataManager>
         return data2.StartSignalTime.TotalSeconds - data1.EndSignalTime.TotalSeconds;
     }
 
+    public SignalData GetSignal(int index)
+    {
+        if(index < 0 || index >= signalList.Count)
+        {
+            Debug.LogError("Index of Signal List Getter out of range.");
+            return null;
+        }
+        else
+        {
+            return signalList[index];
+        }
+    }
+
     public void AddSignal()
     {
         signalList.Add(new SignalData());
