@@ -5,17 +5,16 @@ using UnityEngine;
 public class DataManager : Singleton<DataManager>
 {
     public enum SignalSpace { Letter, Word};
-
     List<SignalData> signalList;
+
+    OutputManager outputManager;
+
+    string currentOutputText;
 
     public void Init_DataManager()
     {
         signalList = new List<SignalData>();
-    }
-
-    public double TimeBetweenTwoSignals(SignalData data1, SignalData data2)
-    {
-        return data2.StartSignalTime.TotalSeconds - data1.EndSignalTime.TotalSeconds;
+        outputManager = GameObject.Find("Manager").GetComponent<OutputManager>();
     }
 
     public SignalData GetSignal(int index)
@@ -34,12 +33,19 @@ public class DataManager : Singleton<DataManager>
     public void AddSignal()
     {
         signalList.Add(new SignalData());
-        Debug.Log("Signal Start: " + signalList[signalList.Count - 1].StartSignalTime.TotalSeconds);
     }
 
     public void EndSignal()
     {
         signalList[signalList.Count - 1].EndSignal();
-        Debug.Log("Signal End: " + signalList[signalList.Count - 1].EndSignalTime.TotalSeconds);
+        outputManager.SetOutputText(DataParser.SignalDataArrayToMorse(signalList.ToArray()));
     }
+
+    public void ResetData()
+    {
+        signalList.Clear();
+        outputManager.SetOutputText(DataParser.SignalDataArrayToMorse(signalList.ToArray()));
+    }
+
+   
 }

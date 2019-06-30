@@ -10,15 +10,21 @@ public class InputManager : MonoBehaviour
         DataManager.Instance.Init_DataManager();
     }
 
-    public void OnButtonDown()
+    public void OnMorseButtonDown()
     {
         SoundManager.Instance.PlayMorseSound();
         DataManager.Instance.AddSignal();
     }
 
-    public void OnButtonUp()
+    public void OnMorseButtonUp()
     {
         SoundManager.Instance.StopMorseSound();
         DataManager.Instance.EndSignal();
+    }
+
+    public void OnResetButtonDown()
+    {
+        DataManager.Instance.ResetData();
+        Debug.Log("Reset Data");
     }
 }
